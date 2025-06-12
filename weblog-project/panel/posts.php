@@ -1,17 +1,24 @@
 <?php
 
 session_start();
-include "../database/pdo_connection.php";
 
 
-if(!isset($_SESSION['user'])){
+if (!isset($_SESSION['user'])) {
   header("location:../login.php");
-  
 }
+
+include "../database/pdo.php";
+include "../database/jdf.php";
+
+$err = "";
+$show = $connection->prepare("SELECT * FROM posts");
+$show->execute();
+
+$posts = $show->fetchAll(PDO::FETCH_ASSOC);
+
 
 
 ?>
-
 
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
@@ -157,31 +164,45 @@ if(!isset($_SESSION['user'])){
           <h6 class="text-gray h6 fw-bold">
             <i class="bi bi-plus-circle"></i>
 
-           
-              <table class="table table-striped ">
-                <thead class="">
-                  <tr class="" >
-                    <th scope="col">#</th>
-                    <th scope="col">عنوان </th>
-                    <th scope="col">تاریخ ثبت</th>
-                    <th scope="col">عکس پست</th>
-                    <th scope="col">نویسنده</th>
-                    <th scope="col">عملیات</th>
-                  </tr>
-                </thead>
-                
+
+            <table class="table table-striped ">
+
+              <thead class="">
+                <tr class="">
+                  <th scope="col">شناسه پست</th>
+                  <th scope="col">عنوان </th>
+                  <th scope="col">تاریخ ثبت</th>
+                  <th scope="col">عکس پست</th>
+                  <th scope="col">نویسنده</th>
+                  <th scope="col">عملیات</th>
+                </tr>
+              </thead>
+              <?php foreach ($posts as $post): ?>
                 <tbody>
+
+                  <tr>
+
+                    <td><?= $post['id'] ?></td>
+                    <td><?= $post['title'] ?></td>
+                    <td><?= $post['date'] ?></td>
+                    <td><img src="<?= $post['image'] ?>" style="height: 50px; width: 50px;" alt=""></td>
+                    <td><?= $post['writer'] ?></td>
+                    <td><a href="" class="btn btn-danger">حذف</a>  <a href="" class="btn btn-warning">ویرایش</a></td>
                  
+
                   </tr>
+
+
 
                 </tbody>
-               
-                
-                
-              </table>
+              <?php endforeach; ?>
 
-            
-          
+
+
+            </table>
+
+
+
         </div>
       </div>
     </section>

@@ -53,7 +53,7 @@ if(!isset($_SESSION['user'])){
                                 <a href="addpost.php">  افزودن مقاله </a>
                             </li>
                             <li class="submenu-item">
-                                <a href="#">ویرایش مقاله ها</a>
+                                <a href="posts.php"> مقاله ها</a>
                             </li>
                            
                         </ul>
