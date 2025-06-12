@@ -16,29 +16,29 @@ if (
     if ($_POST['password'] === $_POST['confirm']) {
         // بررسی اینکه کاربر حداقل 6 کاراکتر را به عنوان رمز وارد کند
         if (strlen($_POST['password']) > 6) {
-            $stmt = $connection->prepare("SELECT * FROM users WHERE email=?"); 
-            $stmt->execute([$email]); // مقدار ایمن ایمیل  جایگزین ؟ می‌شود
-            $user = $stmt->fetch(); //اولین نتیجه جستجو را به صورت یک آرایه برمی‌گرداند.
-            //گر کاربری پیدا نشد یوزر را فالس می کند
-            if ($user === false) {
-                // ذخیره اطلاعات ورودی کاربر در فرم ثبت نام در متغیر 
-                if (isset($_POST['sub'])) {
-                    $username = $_POST['username'];
-                    $email = $_POST['email'];
-                    $password = $_POST['password'];
-                    // قراردادن مقادیر ستون های دیتا بیس
-                    $res = $connection->prepare("INSERT INTO users SET username=? , email=? , password=?");
-                    // مقدار اول را نام مقدار دوم را ایمیل و مقدار سوم را پسورد قرار بده
-                    $res->bindValue(1, $username);
-                    $res->bindValue(2, $email);
-                    $res->bindValue(3, $password);
+            $sql="SELECT * FROM users WHERE email=?";
+            $statment=$connection->prepare($sql);
+            $statment->execute([$_POST['email']]);
+            $user=$statment->fetch();
+            if($user===false){
+            // ذخیره اطلاعات ورودی کاربر در فرم ثبت نام در متغیر 
+            if (isset($_POST['sub'])) {
+                $username = $_POST['username'];
+                $email = $_POST['email'];
+                $password = $_POST['password'];
+                // قراردادن مقادیر ستون های دیتا بیس
+                $res = $connection->prepare("INSERT INTO users SET username=? , email=? , password=?");
+                // مقدار اول را نام مقدار دوم را ایمیل و مقدار سوم را پسورد قرار بده
+                $res->bindValue(1, $username);
+                $res->bindValue(2, $email);
+                $res->bindValue(3, $password);
 
 
-                    $res->execute();
-                }
-            } else {
-                $err = "ایمیل تکراری است ....!";
+                $res->execute();
             }
+        }else{
+            $err = "ایمیل تکراری است ....!";
+        }
         } else {
             $err = "تعداد کاراکتر باید بیشتر از 6 باشد ...!";
             //    echo "<script>alert('$err');</script>";
@@ -142,7 +142,7 @@ if (
                 </div>
 
                 <p class="text">
-                    قبلا ثبت نام کرده اید ؟ <a href="/login.html" class="text-primary">ورود</a>
+                    قبلا ثبت نام کرده اید ؟ <a href="login.php" class="text-primary">ورود</a>
                 </p>
             </form>
         </div>
