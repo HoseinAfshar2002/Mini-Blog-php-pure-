@@ -1,50 +1,12 @@
-<?php 
+<?php
 session_start();
 
-
-if (!isset($_SESSION['user'])) {
-   
-     header("location:../login.php");
-
-
+if(!isset($_SESSION['user'])){
+    header("location:../login.php");
+    
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
@@ -58,7 +20,7 @@ if (!isset($_SESSION['user'])) {
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
-    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="css/main.css">
 
     <title>codeyad blog</title>
 </head>
@@ -74,7 +36,7 @@ if (!isset($_SESSION['user'])) {
             <div class="mt-4">
                 <ul class="list-unstyled">
                     <li class="sidebar-item active">
-                        <a class="sidebar-link" href="./index.html">
+                        <a class="sidebar-link" href="#">
                             <i class="me-2 bi bi-grid-fill"></i>
                             <span>داشبورد</span>
                         </a>
@@ -82,20 +44,18 @@ if (!isset($_SESSION['user'])) {
 
                     <li x-data="dropdown" class="sidebar-item">
                         <div @click="toggle" class="sidebar-link">
-                            <i class="me-2 bi bi-shop"></i>
-                            <span>فروشگاه</span>
+                            <i class="me-2 bi bi-file-text"></i>
+                            <span>مقالات</span>
                             <i class="ms-auto bi bi-chevron-down"></i>
                         </div>
                         <ul x-show="open" x-transition class="submenu">
                             <li class="submenu-item">
-                                <a href="#">لیست فروشگاه ها</a>
+                                <a href="addpost.php">  افزودن مقاله </a>
                             </li>
                             <li class="submenu-item">
-                                <a href="#">ایجاد فروشگاه</a>
+                                <a href="#">ویرایش مقاله ها</a>
                             </li>
-                            <li class="submenu-item">
-                                <a href="#">ویرایش فروشگاه</a>
-                            </li>
+                           
                         </ul>
                     </li>
 
@@ -173,7 +133,7 @@ if (!isset($_SESSION['user'])) {
                     <li x-data="dropdown" class="sidebar-item">
                         <div @click="toggle" class="sidebar-link">
                             <i class="me-2 bi bi-power"></i>
-                            <span><a style="text-decoration: none; " href="../lagout.php">خروج</a></span>
+                            <span><a class="text-decoration-none text-dark" href="../logout.php">خروج</a></span>
                             <i class="ms-auto bi "></i>
                         </div>
                         <ul x-show="open" x-transition class="submenu">
@@ -206,9 +166,9 @@ if (!isset($_SESSION['user'])) {
     <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
     <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
 
-    <script src="./js/charts/chart1.js"></script>
-    <script src="./js/charts/chart2.js"></script>
-    <script src="./js/alpineComponents.js"></script>
+    <script src="js/charts/chart1.js"></script>
+    <script src="js/charts/chart2.js"></script>
+    <script src="js/alpineComponents.js"></script>
 </body>
 
 </html>
